@@ -29,6 +29,7 @@ class _InstitutionDetailsScreenState
   late TextEditingController addressController;
 
   String selectedStatus = 'pending';
+  bool selectedSubscribed = false;
 
   @override
   void initState() {
@@ -44,6 +45,7 @@ class _InstitutionDetailsScreenState
         TextEditingController(text: widget.institution.address ?? '');
 
     selectedStatus = widget.institution.status;
+    selectedSubscribed = widget.institution.subscribed;
   }
 
   @override
@@ -97,6 +99,9 @@ class _InstitutionDetailsScreenState
                 const SizedBox(height: 24),
 
                 _buildDropdownField(),
+                const SizedBox(height: 24),
+
+                _buildSubscribedDropdown(), // 👈 add this
                 const SizedBox(height: 24),
 
                 _buildTextField('ADDRESS', addressController),
@@ -154,6 +159,27 @@ class _InstitutionDetailsScreenState
     );
   }
 
+  Widget _buildSubscribedDropdown() {
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Text('SUBSCRIBED', style: AppTextStyles.fieldLabel),
+        DropdownButtonFormField<bool>(
+          value: selectedSubscribed,
+          items: const [
+            DropdownMenuItem(value: true, child: Text('True')),
+            DropdownMenuItem(value: false, child: Text('False')),
+          ],
+          onChanged: (val) {
+            setState(() {
+              selectedSubscribed = val!;
+            });
+          },
+        ),
+      ],
+    );
+  }
+
   Widget _buildTextField(String label, TextEditingController controller) {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
@@ -202,6 +228,7 @@ class _InstitutionDetailsScreenState
       phone: phoneController.text,
       address: addressController.text,
       status: selectedStatus,
+      subscribed: selectedSubscribed,
     );
 
     context.read<InstitutionCubit>().updateInstitution(

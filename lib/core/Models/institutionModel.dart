@@ -8,6 +8,7 @@ class InstitutionModel {
   final String institutionType;
   final String location;
   final String status;
+  final bool subscribed;
 
   const InstitutionModel({
     required this.id,
@@ -19,6 +20,7 @@ class InstitutionModel {
     required this.institutionType,
     required this.location,
     required this.status,
+    required this.subscribed,
   });
 
   factory InstitutionModel.fromJson(Map<String, dynamic> json) {
@@ -36,6 +38,7 @@ class InstitutionModel {
       institutionType: json['institution_type'] as String,
       location: json['location'] as String,
       status: json['status'] ?? 'pending',
+      subscribed: json['subscribed'] ?? false,
     );
   }
 
@@ -61,6 +64,7 @@ class InstitutionModel {
     String? institutionType,
     String? location,
     String? status,
+    bool? subscribed,
   }) {
     return InstitutionModel(
       id: id ?? this.id,
@@ -72,6 +76,7 @@ class InstitutionModel {
       institutionType: institutionType ?? this.institutionType,
       location: location ?? this.location,
       status: status ?? this.status,
+      subscribed: subscribed ?? this.subscribed,
     );
   }
 }

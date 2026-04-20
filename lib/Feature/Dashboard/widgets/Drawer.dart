@@ -9,8 +9,6 @@ class QudraDrawer extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    // ✅ SAFE way (fixes your error)
-
 
     return Drawer(
       backgroundColor: AppColors.background,
@@ -61,11 +59,22 @@ class QudraDrawer extends StatelessWidget {
             /// Placeholder
             _buildDrawerItem(
               context: context,
-              icon: Icons.verified_user_outlined,
-              title: 'User Verification',
+              icon: Icons.person,
+              title: 'Users',
               isSelected: false,
               onTap: () {  },
             ),
+
+            _buildDrawerItem(
+              context: context,
+              icon: Icons.tips_and_updates,
+              title: 'Rights&tips',
+              isSelected: false,
+              onTap: () {
+                context.go("/tips&rights");
+              },
+            ),
+
 
             _buildDrawerItem(
               context: context,

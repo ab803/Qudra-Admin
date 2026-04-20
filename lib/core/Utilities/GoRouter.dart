@@ -1,7 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
+import '../../Feature/Auth/Login/Loginview.dart';
+import '../../Feature/Auth/viewModel/auth_cubit.dart';
 import '../../Feature/Dashboard/DashboardView.dart';
+import '../../Feature/Rights&tips/Rights&tipsView.dart';
+import '../../Feature/Rights&tips/repo/Rights&tipsRepo.dart';
+import '../../Feature/Rights&tips/viewModel/right_tips_cubit.dart';
 import '../../Feature/institution/institution.dart';
 import '../../Feature/institution/widgets/ServiceWidgets/ServiceDetials.dart';
 import '../../Feature/institution/widgets/Viewservices.dart';
@@ -19,7 +24,7 @@ import 'getit.dart';
 class AppRouter {
 
   static final router = GoRouter(
-    initialLocation: '/Dashboard',
+    initialLocation: '/login',
     routes: [
       GoRoute(
         path: "/Dashboard",
@@ -80,6 +85,22 @@ class AppRouter {
           return ServiceDetailsView(service: service);
         },
       ),
+
+      GoRoute(
+        path: "/tips&rights",
+        builder: (context, state) => BlocProvider(
+          create: (context) => RightstipsCubit(getIt<RightstipsRepository>()),
+          child: const RightstipsView(),
+        ),
+      ),
+
+      GoRoute(
+        path: '/login',
+        builder: (context, state) => BlocProvider(
+          create: (_) => getIt<AuthCubit>(),
+          child: const LoginView(),
+        ),
+      ),
     ],
 
     errorBuilder: (context, state) =>
@@ -87,4 +108,6 @@ class AppRouter {
       body: Center(child: Text('Page not found')),
     ),
   );
+
+
 }
