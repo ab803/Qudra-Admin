@@ -67,7 +67,7 @@ class _LoginViewState extends State<LoginView>
       body: BlocConsumer<AuthCubit, AuthState>(
         listener: (context, state) {
           if (state is AuthSuccess) {
-            context.go('/dashboard');
+            context.go('/Dashboard');
           } else if (state is AuthFailure) {
             ScaffoldMessenger.of(context).showSnackBar(
               SnackBar(
