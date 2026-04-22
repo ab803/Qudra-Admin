@@ -257,21 +257,8 @@ class _LoginViewState extends State<LoginView>
                                       ? 'Enter your password'
                                       : null,
                                 ),
-                                const SizedBox(height: 12),
 
-                                // ── Forgot Password ──
-                                Align(
-                                  alignment: Alignment.centerRight,
-                                  child: GestureDetector(
-                                    onTap: () => context.push('/forgot-password'),
-                                    child: Text(
-                                      'Forgot password?',
-                                      style: AppTextStyles.link.copyWith(
-                                        fontSize: 13,
-                                      ),
-                                    ),
-                                  ),
-                                ),
+
                                 const SizedBox(height: 28),
 
                                 // ── Login Button ──

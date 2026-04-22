@@ -4,6 +4,8 @@ import 'package:get_it/get_it.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
 import '../../Feature/Auth/repo/AuthRepo.dart';
 import '../../Feature/Auth/viewModel/auth_cubit.dart';
+import '../../Feature/Dashboard/Repo/repo.dart';
+import '../../Feature/Dashboard/viewModel/dashboard_cubit.dart';
 import '../../Feature/Rights&tips/repo/Rights&tipsRepo.dart';
 import '../../Feature/Rights&tips/viewModel/right_tips_cubit.dart';
 import '../../Feature/institution/Repo/InstitutionRepository.dart';
@@ -12,6 +14,7 @@ import '../../Feature/institution/viewModel/institution_cubit.dart';
 import '../../Feature/institution/viewModel/serviceViewModel/service_cubit.dart';
 import '../../Feature/subscribtions/repo/bundle_repository.dart';
 import '../Services/Supabase/Authservice.dart';
+import '../Services/Supabase/DashboardService.dart';
 import '../Services/Supabase/institutionServices.dart';
 import '../Services/Supabase/services.dart';
 import '../Services/Supabase/tips&rightsService.dart';
@@ -80,5 +83,18 @@ void setupLocater() {
         () => AuthCubit(getIt<AuthRepo>()),
   );
 
+  // In your service_locator.dart
+
+  getIt.registerLazySingleton<DashboardService>(
+        () => DashboardService(Supabase.instance.client),
+  );
+
+  getIt.registerLazySingleton<DashboardRepository>(
+        () => DashboardRepository(getIt<DashboardService>()),
+  );
+
+  getIt.registerFactory<DashboardCubit>(
+        () => DashboardCubit(getIt<DashboardRepository>()),
+  );
 
 }
