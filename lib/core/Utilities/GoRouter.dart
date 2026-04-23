@@ -16,6 +16,10 @@ import '../../Feature/subscribtions/subscribtionsView.dart';
 import '../../Feature/subscribtions/viewModel/bundle_cubit.dart';
 import '../../Feature/subscribtions/widgets/AddBundle.dart';
 import '../../Feature/subscribtions/widgets/UbdateBundle.dart';
+import '../../Feature/user/view/UserManagement.dart';
+import '../../Feature/user/view/bookingView.dart';
+import '../../Feature/user/viewModel/booking_cubit.dart';
+import '../../Feature/user/viewModel/user__cubit.dart';
 import '../Models/BundleModel.dart';
 import '../Models/ServicesModel.dart';
 import '../Models/institutionModel.dart';
@@ -101,6 +105,29 @@ class AppRouter {
           child: const LoginView(),
         ),
       ),
+
+      GoRoute(
+        path: '/users',
+        builder: (context, state) => BlocProvider(
+          create: (_) => getIt<UserCubit>(),
+          child: const UserManagementView(),
+        ),
+      ),
+
+
+      GoRoute(
+        path: '/users/:userId/bookings',
+        builder: (context, state) {
+          final userId = state.pathParameters['userId']!;
+          final userName = state.uri.queryParameters['name'];
+          return BlocProvider(
+            create: (_) => getIt<BookingCubit>(),
+            child: BookingView(userId: userId, userName: userName),
+          );
+        },
+      ),
+
+
     ],
 
     errorBuilder: (context, state) =>

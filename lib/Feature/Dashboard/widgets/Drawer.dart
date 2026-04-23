@@ -62,7 +62,9 @@ class QudraDrawer extends StatelessWidget {
               icon: Icons.person,
               title: 'Users',
               isSelected: false,
-              onTap: () {  },
+              onTap: () {
+                context.go("/users");
+              },
             ),
 
             _buildDrawerItem(
@@ -76,31 +78,11 @@ class QudraDrawer extends StatelessWidget {
             ),
 
 
-            _buildDrawerItem(
-              context: context,
-              icon: Icons.settings_outlined,
-              title: 'Platform Settings',
-              isSelected: false,
-
-              onTap: () {  },
-            ),
 
             const Spacer(),
 
-            /// Floating Buttons
-            _buildSupportButton(
-              Icons.history,
-              AppColors.white,
-              AppColors.textPrimary,
-            ),
-            _buildSupportButton(
-              Icons.help_outline,
-              AppColors.primary,
-              AppColors.white,
-            ),
 
-            /// Footer
-            _buildProfileFooter(),
+
           ],
         ),
       ),
@@ -155,35 +137,5 @@ class QudraDrawer extends StatelessWidget {
     );
   }
 
-  Widget _buildProfileFooter() {
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 24),
-          child: Row(
-            children: const [
-              CircleAvatar(
-                radius: 20,
-                backgroundImage:
-                NetworkImage('https://i.pravatar.cc/150?img=11'),
-              ),
-              SizedBox(width: 12),
-              Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Text('Super Admin'),
-                  Text('PLATFORM CONTROLLER'),
-                ],
-              )
-            ],
-          ),
-        ),
-        const Padding(
-          padding: EdgeInsets.only(left: 24, top: 12, bottom: 24),
-          child: Text('v1.0.0'),
-        )
-      ],
-    );
-  }
+
 }
