@@ -27,9 +27,10 @@ class _InstitutionDetailsScreenState
   late TextEditingController typeController;
   late TextEditingController phoneController;
   late TextEditingController addressController;
-
+  late TextEditingController descriptionController;
   String selectedStatus = 'pending';
   bool selectedSubscribed = false;
+
 
   @override
   void initState() {
@@ -43,7 +44,8 @@ class _InstitutionDetailsScreenState
         TextEditingController(text: widget.institution.phone ?? '');
     addressController =
         TextEditingController(text: widget.institution.address ?? '');
-
+    descriptionController =
+        TextEditingController(text: widget.institution.description ?? '');
     selectedStatus = widget.institution.status;
     selectedSubscribed = widget.institution.subscribed;
   }
@@ -55,6 +57,7 @@ class _InstitutionDetailsScreenState
     typeController.dispose();
     phoneController.dispose();
     addressController.dispose();
+    descriptionController.dispose();
     super.dispose();
   }
 
@@ -105,6 +108,12 @@ class _InstitutionDetailsScreenState
                 const SizedBox(height: 24),
 
                 _buildTextField('ADDRESS', addressController),
+                const SizedBox(height: 24),
+                _buildTextField(
+                  'DESCRIPTION',
+                  descriptionController,
+                  maxLines: 4,
+                ),
                 const SizedBox(height: 40),
 
                 /// 🔴 Discard
@@ -180,13 +189,18 @@ class _InstitutionDetailsScreenState
     );
   }
 
-  Widget _buildTextField(String label, TextEditingController controller) {
+  Widget _buildTextField(
+      String label,
+      TextEditingController controller, {
+        int maxLines = 1,
+      }) {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Text(label, style: AppTextStyles.fieldLabel),
         TextFormField(
           controller: controller,
+          maxLines: maxLines,
           decoration: const InputDecoration(
             border: UnderlineInputBorder(),
           ),
@@ -227,9 +241,11 @@ class _InstitutionDetailsScreenState
       institutionType: typeController.text,
       phone: phoneController.text,
       address: addressController.text,
+      description: descriptionController.text,
       status: selectedStatus,
       subscribed: selectedSubscribed,
     );
+
 
     context.read<InstitutionCubit>().updateInstitution(
       widget.institution.id,

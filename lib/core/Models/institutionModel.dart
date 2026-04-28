@@ -5,6 +5,7 @@ class InstitutionModel {
   final String email;
   final String? phone;
   final String? address;
+  final String? description;
   final String institutionType;
   final String location;
   final String status;
@@ -17,6 +18,7 @@ class InstitutionModel {
     required this.email,
     this.phone,
     this.address,
+    this.description,
     required this.institutionType,
     required this.location,
     required this.status,
@@ -26,19 +28,18 @@ class InstitutionModel {
   factory InstitutionModel.fromJson(Map<String, dynamic> json) {
     return InstitutionModel(
       id: json['id'] as String,
-
       createdAt: json['created_at'] != null
           ? DateTime.parse(json['created_at'])
           : DateTime.now(),
-
       name: json['name'] as String,
       email: json['email'] as String,
       phone: json['phone'] as String?,
       address: json['address'] as String?,
+      description: json['description'] as String?,
       institutionType: json['institution_type'] as String,
       location: json['location'] as String,
-      status: json['status'] ?? 'pending',
-      subscribed: json['subscribed'] ?? false,
+      status: json['status'] as String? ?? 'pending',
+      subscribed: json['subscribed'] as bool? ?? false,
     );
   }
 
@@ -48,9 +49,11 @@ class InstitutionModel {
     'email': email,
     'phone': phone,
     'address': address,
+    'description': description,
     'institution_type': institutionType,
     'location': location,
     'status': status,
+    'subscribed': subscribed,
   };
 
   // ✅ copyWith method (for updates)
@@ -61,11 +64,13 @@ class InstitutionModel {
     String? email,
     String? phone,
     String? address,
+    String? description,
     String? institutionType,
     String? location,
     String? status,
     bool? subscribed,
   }) {
+
     return InstitutionModel(
       id: id ?? this.id,
       createdAt: createdAt ?? this.createdAt,
@@ -73,6 +78,7 @@ class InstitutionModel {
       email: email ?? this.email,
       phone: phone ?? this.phone,
       address: address ?? this.address,
+      description: description ?? this.description,
       institutionType: institutionType ?? this.institutionType,
       location: location ?? this.location,
       status: status ?? this.status,
