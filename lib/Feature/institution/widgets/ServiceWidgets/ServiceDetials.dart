@@ -90,9 +90,10 @@ class _ServiceDetailsViewState extends State<ServiceDetailsView> {
 
   void _save() {
     context.read<ServiceCubit>().updateService(_buildUpdatedModel());
+
   }
 
-  void _discard() => context.go('/Service');
+  void _discard() => context.go("/Service", extra: widget.service.id);
 
   @override
   Widget build(BuildContext context) {
@@ -107,7 +108,7 @@ class _ServiceDetailsViewState extends State<ServiceDetailsView> {
               backgroundColor: Colors.green,
             ),
           );
-          context.pop(); // Return to services list
+          context.go("/Service", extra: widget.service.id); // Return to services list
         }
 
         if (state is ServiceError) {
