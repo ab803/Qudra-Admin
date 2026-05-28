@@ -104,7 +104,7 @@ class _InstitutionDetailsScreenState
                 _buildDropdownField(),
                 const SizedBox(height: 24),
 
-                _buildSubscribedDropdown(), // 👈 add this
+                _buildSubscribedDropdown(),
                 const SizedBox(height: 24),
 
                 _buildTextField('ADDRESS', addressController),
@@ -116,7 +116,7 @@ class _InstitutionDetailsScreenState
                 ),
                 const SizedBox(height: 40),
 
-                /// 🔴 Discard
+                /// Discard
                 SizedBox(
                   width: double.infinity,
                   height: 48,
@@ -133,7 +133,7 @@ class _InstitutionDetailsScreenState
 
                 const SizedBox(height: 16),
 
-                /// 🟢 Save
+                /// Save
                 SizedBox(
                   width: double.infinity,
                   height: 48,
